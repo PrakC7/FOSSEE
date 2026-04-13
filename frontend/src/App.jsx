@@ -70,6 +70,7 @@ function App() {
   const [submitMessage, setSubmitMessage] = useState('')
   const current = useMemo(() => roleData[role], [role])
 
+  // Keep form state and field-level errors in sync so error messages clear as users type.
   const handleFieldChange = (event) => {
     const { name, value } = event.target
 
@@ -108,6 +109,7 @@ function App() {
       errors.participants = 'Participant count must be at least 15.'
     }
 
+    // Block submit when validation fails and provide one high-level message for screen readers.
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors)
       setSubmitMessage('Please fix the highlighted fields and submit again.')
@@ -312,6 +314,7 @@ function App() {
           <h2>Workshop queue</h2>
           <span className="status-tag">Backend-ready</span>
         </div>
+        {/* Queue cards are intentionally hidden until real records are fetched from backend APIs. */}
         <p className="queue-empty">
           Queue records are hidden until the API integration for workshop
           status events is completed.

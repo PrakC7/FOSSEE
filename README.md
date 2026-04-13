@@ -44,7 +44,7 @@ I focused on clarity first:
 
 - Visual hierarchy: the most important information (role, status counts, workflow progress) appears first.
 - Progressive disclosure: detailed interactions come after summary cards so users can orient quickly.
-- Action proximity: request form and queue controls are placed where decision-making happens.
+- Action proximity: request form and role guidance are placed close to workflow context.
 - Consistency: repeated card, chip, and badge patterns reduce cognitive load.
 
 ### 2) How did you ensure responsiveness across devices?
@@ -63,7 +63,7 @@ I focused on clarity first:
 
 ### 4) What was the most challenging part and how did you approach it?
 
-The hardest part was balancing visual richness with mobile usability while keeping the interface fast and readable. I addressed this by building each feature in slices: first information structure, then form interaction, then filtering workflows. That iterative approach made it easier to validate UX at each step and avoid over-designing.
+The hardest part was balancing visual richness with mobile usability while keeping the interface fast and readable. I addressed this by building each feature in slices: first information structure, then form interaction, then backend-ready queue placeholders without fake data. That iterative approach made it easier to validate UX at each step and avoid over-designing.
 
 ## Visual Showcase
 
