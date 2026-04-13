@@ -1,120 +1,139 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useMemo, useState } from 'react'
 import './App.css'
 
+const flowNodes = [
+  {
+    key: 'type',
+    title: 'Workshop Type',
+    desc: 'Admin creates workshop types and base details.',
+  },
+  {
+    key: 'posted',
+    title: 'Workshop Posted',
+    desc: 'Instructor posts workshop availability.',
+  },
+  {
+    key: 'proposed',
+    title: 'Proposed Date',
+    desc: 'Coordinator proposes a date for a selected workshop type.',
+  },
+  {
+    key: 'requested',
+    title: 'Requested Workshop',
+    desc: 'Coordinator requests a workshop from instructor slots.',
+  },
+  {
+    key: 'booked',
+    title: 'Booked Workshop',
+    desc: 'Request is confirmed when instructor accepts.',
+  },
+]
+
+const roleData = {
+  coordinator: {
+    heading: 'Coordinator Workspace',
+    counters: [
+      { label: 'Proposed', value: 5, tone: 'pending' },
+      { label: 'Requested', value: 8, tone: 'info' },
+      { label: 'Booked', value: 3, tone: 'success' },
+      { label: 'Rejected', value: 1, tone: 'danger' },
+    ],
+    tasks: [
+      'Choose workshop type and propose date',
+      'Request available workshop slots',
+      'Track approval and booking status',
+    ],
+  },
+  instructor: {
+    heading: 'Instructor Workspace',
+    counters: [
+      { label: 'Pending Requests', value: 4, tone: 'pending' },
+      { label: 'Accepted', value: 6, tone: 'success' },
+      { label: 'Rescheduled', value: 2, tone: 'info' },
+      { label: 'Rejected', value: 1, tone: 'danger' },
+    ],
+    tasks: [
+      'Post workshop availability',
+      'Review incoming workshop requests',
+      'Accept, reject, or reschedule requests',
+    ],
+  },
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [role, setRole] = useState('coordinator')
+  const current = useMemo(() => roleData[role], [role])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+    <main className="page">
+      <header className="hero">
+        <p className="kicker">FOSSEE Workshop Booking</p>
+        <h1>Workflow-first UI redesign</h1>
+        <p className="subtitle">
+          Built to improve workshop planning clarity for instructors and
+          coordinators on mobile-first layouts.
+        </p>
+      </header>
+
+      <section className="panel role-switcher" aria-label="Role selection">
         <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          type="button"
+          className={role === 'coordinator' ? 'chip active' : 'chip'}
+          onClick={() => setRole('coordinator')}
         >
-          Count is {count}
+          Coordinator
+        </button>
+        <button
+          type="button"
+          className={role === 'instructor' ? 'chip active' : 'chip'}
+          onClick={() => setRole('instructor')}
+        >
+          Instructor
         </button>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <section className="panel">
+        <div className="section-head">
+          <h2>{current.heading}</h2>
+          <span className="status-tag">Live status overview</span>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div className="counter-grid">
+          {current.counters.map((item) => (
+            <article key={item.label} className={`counter-card ${item.tone}`}>
+              <p className="label">{item.label}</p>
+              <p className="value">{item.value}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <section className="panel">
+        <div className="section-head">
+          <h2>System flow map</h2>
+          <span className="status-tag">Based on existing workshop process</span>
+        </div>
+        <div className="flow-grid">
+          {flowNodes.map((node) => (
+            <article key={node.key} className="flow-card">
+              <h3>{node.title}</h3>
+              <p>{node.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel tasks">
+        <div className="section-head">
+          <h2>Current role priorities</h2>
+          <span className="status-tag">Action-focused</span>
+        </div>
+        <ol>
+          {current.tasks.map((task) => (
+            <li key={task}>{task}</li>
+          ))}
+        </ol>
+      </section>
+    </main>
   )
 }
 
