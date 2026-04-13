@@ -126,48 +126,13 @@ body {
   background: #faf6e8;
 }
 
-.counter-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
-}
-
-.counter-card {
-  border-radius: 12px;
-  padding: 0.78rem;
-  color: #fff;
-  min-height: 5.25rem;
-  display: grid;
-  align-content: space-between;
-}
-
-.counter-card .label {
+.empty-note {
   margin: 0;
-  font-size: 0.82rem;
-  opacity: 0.92;
-}
-
-.counter-card .value {
-  margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.counter-card.pending {
-  background: linear-gradient(130deg, #d29100, var(--pending));
-}
-
-.counter-card.info {
-  background: linear-gradient(130deg, #1f6786, var(--info));
-}
-
-.counter-card.success {
-  background: linear-gradient(130deg, #266344, var(--success));
-}
-
-.counter-card.danger {
-  background: linear-gradient(130deg, #7f2f20, var(--danger));
+  padding: 0.9rem;
+  border: 1px dashed #c9be9f;
+  border-radius: 11px;
+  color: #5d5943;
+  background: #fffdf6;
 }
 
 .flow-grid {
@@ -275,28 +240,6 @@ body {
   font-size: 0.85rem;
 }
 
-.queue-toolbar {
-  display: grid;
-  gap: 0.65rem;
-}
-
-.queue-toolbar input,
-.queue-toolbar select {
-  width: 100%;
-  border: 1px solid #cbbf9d;
-  border-radius: 10px;
-  padding: 0.62rem 0.7rem;
-  font: inherit;
-  color: #2e2b1d;
-  background: #fffdfa;
-}
-
-.queue-meta {
-  margin: 0.7rem 0;
-  color: #4d4a37;
-  font-size: 0.85rem;
-}
-
 .queue-empty {
   margin: 0;
   padding: 0.8rem;
@@ -304,82 +247,6 @@ body {
   border-radius: 10px;
   color: #565238;
   background: #fffdf6;
-}
-
-.queue-grid {
-  display: grid;
-  gap: 0.7rem;
-}
-
-.queue-card {
-  border: 1px solid #d8cfb2;
-  border-radius: 12px;
-  padding: 0.85rem;
-  background: #fffdf6;
-}
-
-.queue-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.queue-head h3 {
-  margin: 0;
-  font-size: 0.98rem;
-}
-
-.queue-id {
-  margin: 0.3rem 0 0.6rem;
-  color: #5d5943;
-  font-size: 0.82rem;
-}
-
-.badge {
-  display: inline-flex;
-  border-radius: 999px;
-  padding: 0.22rem 0.55rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.badge.pending {
-  color: #704f00;
-  background: #ffe6a8;
-}
-
-.badge.approved {
-  color: #1f5c3c;
-  background: #caebd8;
-}
-
-.badge.rescheduled {
-  color: #1d5773;
-  background: #cae7f3;
-}
-
-.badge.rejected {
-  color: #742a1d;
-  background: #f7d7d1;
-}
-
-.queue-card dl {
-  margin: 0;
-  display: grid;
-  gap: 0.45rem;
-}
-
-.queue-card dt {
-  margin: 0;
-  font-size: 0.76rem;
-  color: #6b6650;
-}
-
-.queue-card dd {
-  margin: 0.15rem 0 0;
-  font-size: 0.9rem;
-  color: #2f2c1d;
 }
 
 @keyframes reveal {
@@ -404,10 +271,6 @@ body {
     padding: 1.2rem;
   }
 
-  .counter-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .flow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -416,21 +279,10 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .queue-toolbar {
-    grid-template-columns: 2fr 1fr;
-  }
-
-  .queue-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (min-width: 1020px) {
   .flow-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .queue-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
