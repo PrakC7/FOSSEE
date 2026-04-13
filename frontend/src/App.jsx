@@ -157,7 +157,6 @@ function App() {
           <section className="surface-card">
             <div className="section-head">
               <h2>{current.heading}</h2>
-              <span className="status-tag">Live status</span>
             </div>
             <p className="empty-note">{current.statusMessage}</p>
           </section>
@@ -165,7 +164,6 @@ function App() {
           <section className="surface-card">
             <div className="section-head">
               <h2>System flow map</h2>
-              <span className="status-tag">Core workflow reference</span>
             </div>
             <div className="flow-grid">
               {flowNodes.map((node) => (
@@ -180,7 +178,6 @@ function App() {
           <section className="surface-card tasks-card">
             <div className="section-head">
               <h2>Role priorities</h2>
-              <span className="status-tag">Action list</span>
             </div>
             <ol>
               {current.tasks.map((task) => (
@@ -192,7 +189,6 @@ function App() {
           <section className="surface-card">
             <div className="section-head">
               <h2>Workshop request form</h2>
-              <span className="status-tag">Input and validation</span>
             </div>
             <form className="request-form" onSubmit={handleSubmit} noValidate>
               <label htmlFor="workshopType">Workshop type</label>
@@ -312,7 +308,6 @@ function App() {
       <section className="surface-card queue-panel">
         <div className="section-head">
           <h2>Workshop queue</h2>
-          <span className="status-tag">Backend-ready</span>
         </div>
         {/* Queue cards are intentionally hidden until real records are fetched from backend APIs. */}
         <p className="queue-empty">

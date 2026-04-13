@@ -141,7 +141,7 @@ body {
 .section-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
@@ -152,18 +152,6 @@ body {
   font-family: 'Public Sans', sans-serif;
   font-size: clamp(1.05rem, 2vw, 1.55rem);
   letter-spacing: -0.02em;
-}
-
-.status-tag {
-  display: inline-block;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  padding: 0.28rem 0.52rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--secondary);
-  background: var(--surface-base);
-  font-weight: 600;
 }
 
 .empty-note,
