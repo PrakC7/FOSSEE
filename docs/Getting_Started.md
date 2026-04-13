@@ -1,42 +1,79 @@
-# Guide to install and get this website running
+# Guide To Install And Run
 
-### Follow below given Steps to get started
-> __NOTE__: Use Python3 
-1. Clone this repo.
-    > git clone https://github.com/FOSSEE/workshop_booking.git
+## Prerequisites
 
-2. Create a virtual environment and install all the required packages from requirements.txt
-    > pip install -r requirements.txt 
+- Python 3
+- pip
+- Node.js and npm (for frontend preview)
 
-3. Make Migrations and Migrate
-    > python manage.py makemigrations\
-    > python manage.py migrate
+Validated locally with:
 
-4. Create Super User
-    > python manage.py createsuperuser
+- Python 3.12.7
+- Django 3.0.7
 
-5. Start Server
-    > python manage.py runserver
+## Backend Setup (Django)
 
-6. Goto admin page and login using superuser credentials
-    > localhost:8000/admin
+1. Clone the repository.
 
-7. Goto Groups and create one group called __instructor__ and give it all permissions.
+    git clone https://github.com/FOSSEE/workshop_booking.git
 
-8. By default when a user registers, he is assigned a coordinator position, using the admin panel set the required users profile position as instructor and add him/her in instructor group along with the required permissions.
+2. Create and activate a virtual environment.
 
-9. Under *settings.py* file see to it that all required variables are set then you're good to go!
+    Windows PowerShell:
 
-### Instructor specific steps
+    python -m venv .venv
+    .\.venv\Scripts\Activate.ps1
 
-1. An instructor can create workshops as per his/her availibility in __Create Workshop__ tab.
+3. Install backend dependencies.
 
-2. Instructor can see monthly workshop count, upcoming workshop etc. in Statistics > Workshop Statistics
+    pip install -r requirements.txt
 
-3. Instructors can view and post comments on coordinator's profile from Profile Statistics or Workshop Status page.
+4. Run migrations.
 
+    python manage.py makemigrations
+    python manage.py migrate
 
-### Coordinator specific steps
+5. Create a superuser.
 
-1. A coordinator can sent workshop proposal based on his/her convenience under Workshops > Propose a Workshop option.
+    python manage.py createsuperuser
+
+6. Start the backend server.
+
+    python manage.py runserver
+
+7. Open admin panel and login using superuser credentials.
+
+    http://127.0.0.1:8000/admin
+
+## Admin Configuration
+
+1. In admin, create one group named instructor and grant required permissions.
+2. By default, newly registered users are coordinators.
+3. For instructor accounts, set profile position to instructor and add user to instructor group.
+4. Confirm required environment variables are configured in settings before production use.
+
+## Frontend Setup (React UI/UX layer)
+
+1. Open a new terminal.
+2. Go to frontend folder.
+
+    cd frontend
+
+3. Install frontend packages.
+
+    npm install
+
+4. Start frontend dev server.
+
+    npm run dev
+
+## Instructor Flow
+
+1. Instructors can create workshops in Create Workshop.
+2. Instructors can view monthly counts and upcoming workshops in Statistics > Workshop Statistics.
+3. Instructors can view and post comments on coordinator profiles from Profile Statistics or Workshop Status page.
+
+## Coordinator Flow
+
+1. Coordinators can send workshop proposals through Workshops > Propose a Workshop.
 

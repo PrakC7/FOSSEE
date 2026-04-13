@@ -1,6 +1,6 @@
-Django>=5.2,<5.3
+Django==3.0.7
 coverage>=7.0
-pyaml>=24.4
-django-recurrence>=1.11.1
-python-decouple>=3.8
-pandas>=2.2
+pyaml>=26.0
+django-recurrence==1.11.1
+python-decouple==3.3
+pandas>=2.2,<4.0

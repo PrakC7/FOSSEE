@@ -16,10 +16,25 @@ https://github.com/PrakC7/FOSSEE
 
 ## Setup Instructions
 
-### Frontend (screening task scope)
+### Backend (Django)
 
-1. Open terminal in project root.
-2. Run:
+1. Create virtual environment and activate it.
+2. Install dependencies.
+3. Run migrations.
+4. Start backend server.
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Backend URL:
+http://127.0.0.1:8000/
+
+### Frontend (React UI)
 
 ```bash
 cd frontend
@@ -27,9 +42,10 @@ npm install
 npm run dev
 ```
 
-3. Open the local URL shown by Vite, usually http://127.0.0.1:5173/.
+Frontend URL (default):
+http://127.0.0.1:5173/
 
-### Production Build Check
+### Frontend Production Build Check
 
 ```bash
 cd frontend
