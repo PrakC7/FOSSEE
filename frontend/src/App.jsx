@@ -32,21 +32,27 @@ const flowNodes = [
 const roleData = {
   coordinator: {
     heading: 'Coordinator Workspace',
-    statusMessage: 'No coordinator stats are shown until live backend data is connected.',
+    statusMessage:
+      'Coordinator status metrics will appear here once the dashboard is connected to live workshop records.',
     tasks: [
       'Choose workshop type and propose date',
       'Request available workshop slots',
       'Track approval and booking status',
     ],
+    guide:
+      'Focus on proposal quality and scheduling clarity before sharing requests with instructors.',
   },
   instructor: {
     heading: 'Instructor Workspace',
-    statusMessage: 'No instructor stats are shown until live backend data is connected.',
+    statusMessage:
+      'Instructor status metrics will appear here once request review events are pulled from the backend.',
     tasks: [
       'Post workshop availability',
       'Review incoming workshop requests',
       'Accept, reject, or reschedule requests',
     ],
+    guide:
+      'Focus on reviewer turnaround and actionable feedback while accepting or rescheduling requests.',
   },
 }
 
@@ -113,182 +119,202 @@ function App() {
   }
 
   return (
-    <main className="page">
-      <header className="hero">
-        <p className="kicker">FOSSEE Workshop Booking</p>
-        <h1>Workflow-first UI redesign</h1>
-        <p className="subtitle">
-          Built to improve workshop planning clarity for instructors and
-          coordinators on mobile-first layouts.
+    <main className="app-shell">
+      <header className="hero-block surface-elevated">
+        <p className="hero-eyebrow">FOSSEE Workshop Booking</p>
+        <h1>Academic workshop request console</h1>
+        <p className="hero-copy">
+          A mobile-first interface for instructor-coordinator workflow with
+          clear state visibility, stronger form guidance, and backend-ready
+          sections.
         </p>
       </header>
 
-      <section className="panel role-switcher" aria-label="Role selection">
-        <button
-          type="button"
-          className={role === 'coordinator' ? 'chip active' : 'chip'}
-          onClick={() => setRole('coordinator')}
-        >
-          Coordinator
-        </button>
-        <button
-          type="button"
-          className={role === 'instructor' ? 'chip active' : 'chip'}
-          onClick={() => setRole('instructor')}
-        >
-          Instructor
-        </button>
-      </section>
-
-      <section className="panel">
-        <div className="section-head">
-          <h2>{current.heading}</h2>
-          <span className="status-tag">Live status</span>
-        </div>
-        <p className="empty-note">{current.statusMessage}</p>
-      </section>
-
-      <section className="panel">
-        <div className="section-head">
-          <h2>System flow map</h2>
-          <span className="status-tag">Based on existing workshop process</span>
-        </div>
-        <div className="flow-grid">
-          {flowNodes.map((node) => (
-            <article key={node.key} className="flow-card">
-              <h3>{node.title}</h3>
-              <p>{node.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="panel tasks">
-        <div className="section-head">
-          <h2>Current role priorities</h2>
-          <span className="status-tag">Action-focused</span>
-        </div>
-        <ol>
-          {current.tasks.map((task) => (
-            <li key={task}>{task}</li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="panel">
-        <div className="section-head">
-          <h2>Workshop request form</h2>
-          <span className="status-tag">Mobile-first input UX</span>
-        </div>
-        <form className="request-form" onSubmit={handleSubmit} noValidate>
-          <label htmlFor="workshopType">Workshop type</label>
-          <select
-            id="workshopType"
-            name="workshopType"
-            value={formData.workshopType}
-            onChange={handleFieldChange}
-            aria-invalid={Boolean(formErrors.workshopType)}
+      <section className="role-strip surface-soft" aria-label="Role selection">
+        <p className="strip-label">Working role</p>
+        <div className="role-actions">
+          <button
+            type="button"
+            className={role === 'coordinator' ? 'role-tab active' : 'role-tab'}
+            onClick={() => setRole('coordinator')}
           >
-            <option value="">Select workshop type</option>
-            <option value="basics-of-python">Basics of Python</option>
-            <option value="advanced-python">Advanced Python</option>
-            <option value="openfoam">OpenFOAM</option>
-            <option value="linux">GNU/Linux Tools</option>
-          </select>
-          {formErrors.workshopType ? (
-            <p className="field-error">{formErrors.workshopType}</p>
-          ) : null}
-
-          <div className="inline-group">
-            <div>
-              <label htmlFor="requestedDate">Requested date</label>
-              <input
-                id="requestedDate"
-                name="requestedDate"
-                type="date"
-                value={formData.requestedDate}
-                onChange={handleFieldChange}
-                aria-invalid={Boolean(formErrors.requestedDate)}
-              />
-              {formErrors.requestedDate ? (
-                <p className="field-error">{formErrors.requestedDate}</p>
-              ) : null}
-            </div>
-
-            <div>
-              <label htmlFor="mode">Mode</label>
-              <select
-                id="mode"
-                name="mode"
-                value={formData.mode}
-                onChange={handleFieldChange}
-              >
-                <option value="offline">Offline</option>
-                <option value="online">Online</option>
-                <option value="hybrid">Hybrid</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="inline-group">
-            <div>
-              <label htmlFor="city">City or campus</label>
-              <input
-                id="city"
-                name="city"
-                type="text"
-                placeholder="Example: IIT Bombay"
-                value={formData.city}
-                onChange={handleFieldChange}
-                aria-invalid={Boolean(formErrors.city)}
-              />
-              {formErrors.city ? <p className="field-error">{formErrors.city}</p> : null}
-            </div>
-
-            <div>
-              <label htmlFor="participants">Participants</label>
-              <input
-                id="participants"
-                name="participants"
-                type="number"
-                min="15"
-                step="1"
-                placeholder="Minimum 15"
-                value={formData.participants}
-                onChange={handleFieldChange}
-                aria-invalid={Boolean(formErrors.participants)}
-              />
-              {formErrors.participants ? (
-                <p className="field-error">{formErrors.participants}</p>
-              ) : null}
-            </div>
-          </div>
-
-          <label htmlFor="agenda">Agenda notes</label>
-          <textarea
-            id="agenda"
-            name="agenda"
-            rows="3"
-            placeholder="Any specific topics, hardware labs, or schedule constraints"
-            value={formData.agenda}
-            onChange={handleFieldChange}
-          />
-
-          <div className="form-actions">
-            <button type="submit">Validate request draft</button>
-            <p aria-live="polite">{submitMessage}</p>
-          </div>
-        </form>
+            Coordinator
+          </button>
+          <button
+            type="button"
+            className={role === 'instructor' ? 'role-tab active' : 'role-tab'}
+            onClick={() => setRole('instructor')}
+          >
+            Instructor
+          </button>
+        </div>
       </section>
 
-      <section className="panel">
+      <div className="workspace-layout">
+        <div className="workspace-main">
+          <section className="surface-card">
+            <div className="section-head">
+              <h2>{current.heading}</h2>
+              <span className="status-tag">Live status</span>
+            </div>
+            <p className="empty-note">{current.statusMessage}</p>
+          </section>
+
+          <section className="surface-card">
+            <div className="section-head">
+              <h2>System flow map</h2>
+              <span className="status-tag">Core workflow reference</span>
+            </div>
+            <div className="flow-grid">
+              {flowNodes.map((node) => (
+                <article key={node.key} className="flow-item">
+                  <h3>{node.title}</h3>
+                  <p>{node.desc}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="surface-card tasks-card">
+            <div className="section-head">
+              <h2>Role priorities</h2>
+              <span className="status-tag">Action list</span>
+            </div>
+            <ol>
+              {current.tasks.map((task) => (
+                <li key={task}>{task}</li>
+              ))}
+            </ol>
+          </section>
+
+          <section className="surface-card">
+            <div className="section-head">
+              <h2>Workshop request form</h2>
+              <span className="status-tag">Input and validation</span>
+            </div>
+            <form className="request-form" onSubmit={handleSubmit} noValidate>
+              <label htmlFor="workshopType">Workshop type</label>
+              <select
+                id="workshopType"
+                name="workshopType"
+                value={formData.workshopType}
+                onChange={handleFieldChange}
+                aria-invalid={Boolean(formErrors.workshopType)}
+              >
+                <option value="">Select workshop type</option>
+                <option value="basics-of-python">Basics of Python</option>
+                <option value="advanced-python">Advanced Python</option>
+                <option value="openfoam">OpenFOAM</option>
+                <option value="linux">GNU/Linux Tools</option>
+              </select>
+              {formErrors.workshopType ? (
+                <p className="field-error">{formErrors.workshopType}</p>
+              ) : null}
+
+              <div className="inline-group">
+                <div>
+                  <label htmlFor="requestedDate">Requested date</label>
+                  <input
+                    id="requestedDate"
+                    name="requestedDate"
+                    type="date"
+                    value={formData.requestedDate}
+                    onChange={handleFieldChange}
+                    aria-invalid={Boolean(formErrors.requestedDate)}
+                  />
+                  {formErrors.requestedDate ? (
+                    <p className="field-error">{formErrors.requestedDate}</p>
+                  ) : null}
+                </div>
+
+                <div>
+                  <label htmlFor="mode">Mode</label>
+                  <select
+                    id="mode"
+                    name="mode"
+                    value={formData.mode}
+                    onChange={handleFieldChange}
+                  >
+                    <option value="offline">Offline</option>
+                    <option value="online">Online</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="inline-group">
+                <div>
+                  <label htmlFor="city">City or campus</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    placeholder="Example: IIT Bombay"
+                    value={formData.city}
+                    onChange={handleFieldChange}
+                    aria-invalid={Boolean(formErrors.city)}
+                  />
+                  {formErrors.city ? (
+                    <p className="field-error">{formErrors.city}</p>
+                  ) : null}
+                </div>
+
+                <div>
+                  <label htmlFor="participants">Participants</label>
+                  <input
+                    id="participants"
+                    name="participants"
+                    type="number"
+                    min="15"
+                    step="1"
+                    placeholder="Minimum 15"
+                    value={formData.participants}
+                    onChange={handleFieldChange}
+                    aria-invalid={Boolean(formErrors.participants)}
+                  />
+                  {formErrors.participants ? (
+                    <p className="field-error">{formErrors.participants}</p>
+                  ) : null}
+                </div>
+              </div>
+
+              <label htmlFor="agenda">Agenda notes</label>
+              <textarea
+                id="agenda"
+                name="agenda"
+                rows="3"
+                placeholder="Topics, lab requirements, or scheduling constraints"
+                value={formData.agenda}
+                onChange={handleFieldChange}
+              />
+
+              <div className="form-actions">
+                <button type="submit">Validate request draft</button>
+                <p aria-live="polite">{submitMessage}</p>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <aside className="surface-card side-guide">
+          <h3>Submission guidance</h3>
+          <p>{current.guide}</p>
+          <ul>
+            <li>Use institutional emails for faster verification.</li>
+            <li>Keep objectives specific and measurable.</li>
+            <li>Mention infrastructure constraints in agenda notes.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <section className="surface-card queue-panel">
         <div className="section-head">
           <h2>Workshop queue</h2>
           <span className="status-tag">Backend-ready</span>
         </div>
         <p className="queue-empty">
-          Queue records are intentionally hidden until real workshop data is
-          connected from the backend.
+          Queue records are hidden until the API integration for workshop
+          status events is completed.
         </p>
       </section>
     </main>
