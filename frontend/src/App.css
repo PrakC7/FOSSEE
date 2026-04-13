@@ -202,6 +202,79 @@ body {
   gap: 0.4rem;
 }
 
+.request-form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.request-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.request-form input,
+.request-form select,
+.request-form textarea {
+  width: 100%;
+  border: 1px solid #cbbf9d;
+  border-radius: 10px;
+  padding: 0.62rem 0.7rem;
+  font: inherit;
+  color: #2e2b1d;
+  background: #fffdfa;
+}
+
+.request-form input:focus-visible,
+.request-form select:focus-visible,
+.request-form textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--focus), white 45%);
+  outline-offset: 1px;
+}
+
+.request-form [aria-invalid='true'] {
+  border-color: #9b3f2d;
+  background: #fff7f5;
+}
+
+.field-error {
+  margin: 0.2rem 0 0;
+  color: #8a2d1d;
+  font-size: 0.8rem;
+}
+
+.inline-group {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.form-actions {
+  margin-top: 0.35rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-actions button {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  padding: 0.62rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: #f2f7f2;
+  background: #2f6f4f;
+  cursor: pointer;
+}
+
+.form-actions button:hover {
+  background: #275f44;
+}
+
+.form-actions p {
+  margin: 0;
+  color: #4d4a37;
+  font-size: 0.85rem;
+}
+
 @keyframes reveal {
   from {
     opacity: 0;
@@ -229,6 +302,10 @@ body {
   }
 
   .flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inline-group {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
