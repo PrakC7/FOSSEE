@@ -8,9 +8,9 @@ https://github.com/PrakC7/FOSSEE
 ## What Was Improved
 
 - Workflow-first dashboard structure for instructors and coordinators
-- Clear status cards for booked, requested, pending, approved, and rejected states
+- Clear workflow and status areas with backend-ready empty states
 - Accessible workshop request form with inline validation feedback
-- Search and filter controls for workshop queue tracking
+- Queue section prepared for backend wiring without placeholder records
 - Responsive layouts for mobile, tablet, and desktop breakpoints
 - SEO metadata updates for better page discoverability
 
@@ -58,7 +58,7 @@ I focused on clarity first:
 
 - I used lightweight CSS and plain React state rather than heavy UI libraries.
 - I avoided animation-heavy interactions and limited motion to short reveal transitions.
-- I kept data examples local in memory to demonstrate UX behavior without extra runtime dependencies.
+- I removed hardcoded sample records and kept backend-ready placeholders to avoid misleading data.
 - I used simple semantic markup and small component logic to keep bundle growth controlled.
 
 ### 4) What was the most challenging part and how did you approach it?
