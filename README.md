@@ -93,6 +93,9 @@ Before screenshots:
 
 After screenshots:
 
+
+**After screenshots pending update to reflect current UI (no badges in section corners).**
+
 - [Mobile After](docs/screenshots/after/mobile-after.png)
 - [Desktop After](docs/screenshots/after/desktop-after.png)
 
