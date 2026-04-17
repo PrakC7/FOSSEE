@@ -1,0 +1,320 @@
+:root {
+  --primary: #000666;
+  --primary-container: #1a237e;
+  --secondary: #48626e;
+  --surface: #f9f9f9;
+  --surface-low: #f3f3f3;
+  --surface-base: #eeeeee;
+  --surface-card: #ffffff;
+  --text-main: #1a1c1c;
+  --text-muted: #454652;
+  --outline-soft: rgba(118, 118, 131, 0.2);
+  --error: #ba1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 8% 18%, #f2f4ff 0%, transparent 36%),
+    radial-gradient(circle at 92% 14%, #ebf3f7 0%, transparent 28%),
+    linear-gradient(160deg, var(--surface), var(--surface-low));
+  color: var(--text-main);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(1180px, 100% - 2rem);
+  margin: 0 auto;
+  padding: 1.25rem 0 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.surface-card,
+.surface-soft,
+.surface-elevated {
+  border-radius: 8px;
+}
+
+.surface-card {
+  background: var(--surface-card);
+  box-shadow: 0 24px 32px -12px rgba(26, 28, 28, 0.04);
+  padding: 1rem;
+}
+
+.surface-soft {
+  background: var(--surface-base);
+  padding: 0.8rem 1rem;
+}
+
+.surface-elevated {
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: #fff;
+  padding: 1.2rem;
+  box-shadow: 0 26px 36px -14px rgba(0, 6, 102, 0.35);
+}
+
+.hero-eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.hero-block h1 {
+  margin: 0.45rem 0 0;
+  font-family: 'Public Sans', sans-serif;
+  font-size: clamp(1.6rem, 3.6vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.hero-copy {
+  margin: 0.85rem 0 0;
+  max-width: 68ch;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.role-strip {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.strip-label {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.role-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.role-tab {
+  border: 0;
+  border-radius: 6px;
+  background: var(--surface-card);
+  color: var(--secondary);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.role-tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.role-tab:hover {
+  transform: translateY(-1px);
+}
+
+.workspace-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.workspace-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: 'Public Sans', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  letter-spacing: -0.02em;
+}
+
+.empty-note,
+.queue-empty {
+  margin: 0;
+  padding: 0.92rem;
+  background: var(--surface-low);
+  color: var(--text-muted);
+  border-radius: 6px;
+}
+
+.flow-grid {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.flow-item {
+  background: var(--surface-low);
+  border-radius: 6px;
+  padding: 0.9rem;
+}
+
+.flow-item h3 {
+  margin: 0;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.05rem;
+}
+
+.flow-item p {
+  margin: 0.42rem 0 0;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.tasks-card ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.request-form {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.request-form label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.request-form input,
+.request-form select,
+.request-form textarea {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 0.66rem 0.72rem;
+  font: inherit;
+  background: var(--surface-low);
+  color: var(--text-main);
+}
+
+.request-form input:focus-visible,
+.request-form select:focus-visible,
+.request-form textarea:focus-visible,
+.role-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.request-form [aria-invalid='true'] {
+  outline: 2px solid color-mix(in srgb, var(--error), white 10%);
+}
+
+.field-error {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--error);
+}
+
+.inline-group {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.form-actions {
+  margin-top: 0.35rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.form-actions button {
+  appearance: none;
+  border: none;
+  border-radius: 6px;
+  padding: 0.68rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(130deg, var(--primary), var(--primary-container));
+  cursor: pointer;
+}
+
+.form-actions p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.side-guide h3 {
+  margin: 0;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 1.15rem;
+}
+
+.side-guide p {
+  margin: 0.7rem 0;
+  color: var(--text-muted);
+  line-height: 1.42;
+}
+
+.side-guide ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--secondary);
+}
+
+@media (min-width: 760px) {
+  .app-shell {
+    padding-top: 1.5rem;
+    gap: 1.1rem;
+  }
+
+  .surface-elevated,
+  .surface-soft,
+  .surface-card {
+    padding: 1.2rem;
+  }
+
+  .flow-grid,
+  .inline-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .workspace-layout {
+    grid-template-columns: 2fr minmax(260px, 1fr);
+    align-items: start;
+  }
+
+  .side-guide {
+    position: sticky;
+    top: 1rem;
+  }
+
+  .flow-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
